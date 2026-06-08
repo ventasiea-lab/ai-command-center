@@ -4,6 +4,7 @@
 
 - `railway.json` usa `npm run start:railway`.
 - Ese script detecta `RAILWAY_SERVICE_NAME` y arranca el proceso correcto para cada servicio.
+- Si Railway intenta arrancar un servicio sin artefactos compilados, el script ahora ejecuta el build faltante antes del start.
 - Resultado:
   - `web` -> `npm run start:web`
   - `api` -> `npm run start:api`
