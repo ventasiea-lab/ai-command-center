@@ -1,5 +1,15 @@
 # Deployment en Railway
 
+## Config compartida del repo
+
+- `railway.json` usa `npm run start:railway`.
+- Ese script detecta `RAILWAY_SERVICE_NAME` y arranca el proceso correcto para cada servicio.
+- Resultado:
+  - `web` -> `npm run start:web`
+  - `api` -> `npm run start:api`
+  - `agent-bridge` -> `npm run start:bridge`
+  - `jobs` -> `npm run start:jobs`
+
 ## Servicios a crear
 
 ### 1. `web`
@@ -37,4 +47,3 @@
 2. deploy `api`
 3. deploy `agent-bridge`
 4. conectar variables públicas del frontend a URLs reales
-

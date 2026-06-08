@@ -22,6 +22,7 @@
     "start:api": "npm --workspace apps/api run start",
     "start:bridge": "npm --workspace services/agent-bridge run start",
     "start:jobs": "npm --workspace services/jobs run start",
+    "start:railway": "bash scripts/railway-start.sh",
     "lint": "npm --workspace apps/web run lint"
   },
   "devDependencies": {
