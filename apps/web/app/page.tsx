@@ -1,6 +1,11 @@
 import { agentCards, metrics, priorities, timelines } from "../lib/dashboard-data";
 
 export default function HomePage() {
+  const apiHealthUrl = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/health`;
+  const bridgeHealthUrl = `${
+    process.env.NEXT_PUBLIC_BRIDGE_URL || "http://localhost:4100"
+  }/health`;
+
   return (
     <main className="shell">
       <div className="frame">
@@ -13,10 +18,10 @@ export default function HomePage() {
             solo panel.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="http://localhost:4000/health">
+            <a className="button primary" href={apiHealthUrl}>
               Ver estado del API
             </a>
-            <a className="button secondary" href="http://localhost:4100/health">
+            <a className="button secondary" href={bridgeHealthUrl}>
               Ver estado del bridge
             </a>
           </div>
@@ -91,4 +96,3 @@ export default function HomePage() {
     </main>
   );
 }
-
