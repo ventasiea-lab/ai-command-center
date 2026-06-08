@@ -1,0 +1,9 @@
+{
+  "tools": [
+    "market_bias_analysis",
+    "levels_mapping",
+    "indicator_review",
+    "scenario_building",
+    "risk_invalidation_definition"
+  ]
+}

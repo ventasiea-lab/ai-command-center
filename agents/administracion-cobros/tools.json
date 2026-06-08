@@ -1,0 +1,9 @@
+{
+  "tools": [
+    "invoice_tracking",
+    "collections_followup",
+    "financial_pending_review",
+    "admin_checklist_control",
+    "payment_status_reporting"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "tools": [
+    "delegate_to_specialist",
+    "read_shared_memory",
+    "write_shared_memory",
+    "review_agent_outputs",
+    "prioritize_tasks",
+    "request_user_approval_for_sensitive_actions"
+  ]
+}
