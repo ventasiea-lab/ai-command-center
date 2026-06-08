@@ -42,6 +42,14 @@
 - `DATABASE_URL`
 - `CODEX_BRIDGE_SHARED_SECRET`
 
+## Regla crítica para `web`
+
+- `NEXT_PUBLIC_API_URL` y `NEXT_PUBLIC_BRIDGE_URL` deben cargarse en el servicio `web`.
+- Si faltan, el frontend no debe apuntar a `localhost`; debe mostrar que la configuración pública está incompleta.
+- Ejemplo:
+  - `NEXT_PUBLIC_API_URL=https://ai-command-centerapi-production.up.railway.app`
+  - `NEXT_PUBLIC_BRIDGE_URL=https://ai-command-centeragent-bridge-production.up.railway.app`
+
 ## Orden recomendado
 
 1. deploy `web`

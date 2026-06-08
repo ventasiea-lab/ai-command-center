@@ -1,10 +1,13 @@
 import { agentCards, metrics, priorities, timelines } from "../lib/dashboard-data";
 
 export default function HomePage() {
-  const apiHealthUrl = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"}/health`;
-  const bridgeHealthUrl = `${
-    process.env.NEXT_PUBLIC_BRIDGE_URL || "http://localhost:4100"
-  }/health`;
+  const isProduction = process.env.NODE_ENV === "production";
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_API_URL || (isProduction ? "" : "http://localhost:4000");
+  const bridgeBaseUrl =
+    process.env.NEXT_PUBLIC_BRIDGE_URL || (isProduction ? "" : "http://localhost:4100");
+  const apiHealthUrl = apiBaseUrl ? `${apiBaseUrl}/health` : undefined;
+  const bridgeHealthUrl = bridgeBaseUrl ? `${bridgeBaseUrl}/health` : undefined;
 
   return (
     <main className="shell">
@@ -18,13 +21,31 @@ export default function HomePage() {
             solo panel.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href={apiHealthUrl}>
-              Ver estado del API
-            </a>
-            <a className="button secondary" href={bridgeHealthUrl}>
-              Ver estado del bridge
-            </a>
+            {apiHealthUrl ? (
+              <a className="button primary" href={apiHealthUrl}>
+                Ver estado del API
+              </a>
+            ) : (
+              <span className="button primary" aria-disabled="true">
+                Configurar URL del API
+              </span>
+            )}
+            {bridgeHealthUrl ? (
+              <a className="button secondary" href={bridgeHealthUrl}>
+                Ver estado del bridge
+              </a>
+            ) : (
+              <span className="button secondary" aria-disabled="true">
+                Configurar URL del bridge
+              </span>
+            )}
           </div>
+          {isProduction && (!apiHealthUrl || !bridgeHealthUrl) ? (
+            <p className="muted">
+              Faltan variables públicas del frontend en Railway: `NEXT_PUBLIC_API_URL` y/o
+              `NEXT_PUBLIC_BRIDGE_URL`.
+            </p>
+          ) : null}
         </section>
 
         <section className="stats">
