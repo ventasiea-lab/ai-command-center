@@ -4,6 +4,29 @@ set -euo pipefail
 
 service_name="${RAILWAY_SERVICE_NAME:-}"
 
+normalize_service_name() {
+  case "$1" in
+    web|api|agent-bridge|jobs)
+      printf '%s\n' "$1"
+      ;;
+    @ai-command-center/web)
+      printf 'web\n'
+      ;;
+    @ai-command-center/api)
+      printf 'api\n'
+      ;;
+    @ai-command-center/agent-bridge)
+      printf 'agent-bridge\n'
+      ;;
+    @ai-command-center/jobs)
+      printf 'jobs\n'
+      ;;
+    *)
+      printf '%s\n' "$1"
+      ;;
+  esac
+}
+
 ensure_web_build() {
   if [[ ! -f "apps/web/.next/BUILD_ID" ]]; then
     echo "Web production build not found. Running npm run build:web before startup..."
@@ -36,6 +59,8 @@ if [[ -z "${service_name}" ]]; then
   echo "RAILWAY_SERVICE_NAME is not set. Cannot determine which workspace to start."
   exit 1
 fi
+
+service_name="$(normalize_service_name "${service_name}")"
 
 case "${service_name}" in
   web)
